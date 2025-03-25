@@ -1,0 +1,111 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { Canvas1 } from "../react/components/canvas";
+import { FaEnvelope, FaLinkedin, FaGithub } from "react-icons/fa";
+
+const title = "Contact | Théo Bourgeois";
+const description =
+    "Get in touch with Théo Bourgeois, a Halifax-based Software Engineer specializing in modern web development.";
+const keywords =
+    "Contact, Get in Touch, Software Engineer, Web Development, Halifax, Nova Scotia";
+---
+
+<Layout
+    snap={false}
+    title={title}
+    description={description}
+    keywords={keywords}
+>
+    <section
+        id="contact"
+        data-section="Contact"
+        class="min-h-screen mx-auto relative z-20 space-y-8 flex flex-col justify-center items-center px-4"
+    >
+        <Canvas1 className="w-full h-full absolute z-10" client:load />
+
+        <div class="max-w-3xl w-full relative z-20 pt-24">
+            <h2
+                class="text-5xl md:text-7xl sm:text-6xl font-bold drop-shadow-lg mb-6 text-center"
+            >
+                Get In Touch
+            </h2>
+
+            <p class="text-xl md:text-2xl drop-shadow-lg mb-12 text-center">
+                Interested in working together? Have a question about one of my
+                projects? Feel free to reach out to me using any of the methods
+                below.
+            </p>
+
+            <div
+                class="grid grid-cols-1 md:grid-cols-2 gap-8 bg-black/40 backdrop-blur-sm p-8 rounded-xl border border-gray-700/50"
+            >
+                <div
+                    class="contact-card hover:bg-black/30 transition-all duration-300 p-6 rounded-lg"
+                >
+                    <div class="flex items-center mb-4">
+                        <FaEnvelope className="text-3xl mr-4 text-blue-400" />
+                        <h3 class="text-2xl font-semibold">Email</h3>
+                    </div>
+                    <a
+                        href="mailto:theoobourgeois@gmail.com"
+                        class="text-lg hover:text-blue-400 transition-colors duration-300 flex items-center"
+                    >
+                        theoobourgeois@gmail.com
+                    </a>
+                    <p class="mt-3 text-gray-300">
+                        Feel free to email me directly for inquiries,
+                        collaborations, or just to say hello!
+                    </p>
+                </div>
+
+                <div
+                    class="contact-card hover:bg-black/30 transition-all duration-300 p-6 rounded-lg"
+                >
+                    <div class="flex items-center mb-4">
+                        <FaLinkedin className="text-3xl mr-4 text-blue-400" />
+                        <h3 class="text-2xl font-semibold">LinkedIn</h3>
+                    </div>
+                    <a
+                        href="https://www.linkedin.com/in/theobourgeois/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="text-lg hover:text-blue-400 transition-colors duration-300 flex items-center"
+                    >
+                        linkedin.com/in/theobourgeois
+                    </a>
+                    <p class="mt-3 text-gray-300">
+                        Connect with me on LinkedIn to stay updated on my
+                        professional journey.
+                    </p>
+                </div>
+
+                <div
+                    class="contact-card hover:bg-black/30 transition-all duration-300 p-6 rounded-lg md:col-span-2"
+                >
+                    <div class="flex items-center mb-4">
+                        <FaGithub className="text-3xl mr-4 text-blue-400" />
+                        <h3 class="text-2xl font-semibold">
+                            More Ways to Connect
+                        </h3>
+                    </div>
+                    <p class="text-gray-300">
+                        I'm always open to new opportunities, collaborations,
+                        and interesting projects. Whether you're looking for a
+                        software engineer to join your team or want to discuss a
+                        potential project, I'd love to hear from you.
+                    </p>
+                    <p class="mt-4 text-gray-300">
+                        Based in Halifax, Nova Scotia, but available for remote
+                        work worldwide.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+</Layout>
+
+<style>
+    .contact-card {
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+</style>

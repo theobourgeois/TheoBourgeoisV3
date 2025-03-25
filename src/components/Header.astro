@@ -1,0 +1,239 @@
+---
+const navLinks = [
+    { href: "/", text: "Home" },
+    { href: "experience", text: "Experience" },
+    { href: "/projects", text: "Projects" },
+    { href: "/contact", text: "Contact me" },
+];
+
+// Get current path to highlight active link
+const currentPath = Astro.url.pathname;
+---
+
+<header
+    class="flex justify-between items-center pl-4 pr-8 py-4 absolute w-full top-0 bg-gradient-to-b from-black/90 to-transparent z-50"
+>
+    <h1 class="text-2xl sm:text-5xl font-semibold">
+        <a class="hover:no-underline" href="/">Théo Bourgeois</a>
+    </h1>
+
+    <!-- Mobile navigation button -->
+    <button
+        id="menu-btn"
+        class="lg:hidden cursor-pointer relative z-[60] w-10 h-10 flex items-center justify-center"
+        aria-label="Toggle menu"
+        aria-expanded="false"
+    >
+        <div class="menu-icon">
+            <span class="line line-1"></span>
+            <span class="line line-2"></span>
+            <span class="line line-3"></span>
+        </div>
+    </button>
+
+    <!-- Desktop navigation -->
+    <nav class="lg:flex items-center space-x-2 md:space-x-4 font-medium hidden">
+        {
+            navLinks.map((link) => (
+                <a
+                    href={link.href}
+                    class={`text-base relative nav-link ${
+                        currentPath === link.href ||
+                        (link.href !== "/" && currentPath.startsWith(link.href))
+                            ? "active"
+                            : ""
+                    }`}
+                >
+                    {link.text}
+                </a>
+            ))
+        }
+    </nav>
+</header>
+
+<!-- Mobile navigation overlay -->
+<div
+    id="mobile-nav-overlay"
+    class="fixed inset-0 bg-black/80 backdrop-blur-md z-[55] opacity-0 pointer-events-none transition-opacity duration-300"
+>
+    <nav
+        id="mobile-nav"
+        class="h-full flex flex-col items-center justify-center"
+    >
+        {
+            navLinks.map((link, index) => (
+                <a
+                    href={link.href}
+                    class={`mobile-nav-link text-white text-2xl font-medium my-3 py-2 px-4 relative opacity-0 translate-y-8 transition-all duration-300 delay-[calc(var(--index)*50ms)] ${
+                        currentPath === link.href ||
+                        (link.href !== "/" && currentPath.startsWith(link.href))
+                            ? "active"
+                            : ""
+                    }`}
+                    style={`--index: ${index};`}
+                >
+                    {link.text}
+                    <span class="link-indicator" />
+                </a>
+            ))
+        }
+    </nav>
+</div>
+
+<style>
+    /* Menu button animation */
+    .menu-icon {
+        position: relative;
+        width: 24px;
+        height: 20px;
+    }
+
+    .line {
+        position: absolute;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background-color: white;
+        transition: all 0.3s ease;
+        border-radius: 2px;
+    }
+
+    .line-1 {
+        top: 0;
+    }
+
+    .line-2 {
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    .line-3 {
+        bottom: 0;
+    }
+
+    /* Active menu button state */
+    .menu-open .line-1 {
+        top: 50%;
+        transform: translateY(-50%) rotate(45deg);
+        background-color: #60a5fa; /* blue-400 */
+    }
+
+    .menu-open .line-2 {
+        opacity: 0;
+    }
+
+    .menu-open .line-3 {
+        bottom: 50%;
+        transform: translateY(50%) rotate(-45deg);
+        background-color: #60a5fa; /* blue-400 */
+    }
+
+    /* Desktop nav link styles */
+    .nav-link::after {
+        content: "";
+        position: absolute;
+        bottom: -4px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background-color: #60a5fa; /* blue-400 */
+        transition: width 0.3s ease;
+    }
+
+    .nav-link:hover::after,
+    .nav-link.active::after {
+        width: 100%;
+    }
+
+    /* Mobile nav link styles */
+    .mobile-nav-link {
+        display: block;
+        position: relative;
+        overflow: hidden;
+        transition: color 0.3s ease;
+    }
+
+    .mobile-nav-link:hover,
+    .mobile-nav-link.active {
+        color: #60a5fa; /* blue-400 */
+    }
+
+    .link-indicator {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background-color: #60a5fa; /* blue-400 */
+        transform: scaleX(0);
+        transform-origin: right;
+        transition: transform 0.3s ease;
+    }
+
+    .mobile-nav-link:hover .link-indicator,
+    .mobile-nav-link.active .link-indicator {
+        transform: scaleX(1);
+        transform-origin: left;
+    }
+</style>
+
+<script lang="js">
+    const menuBtn = document.getElementById("menu-btn");
+    const mobileNavOverlay = document.getElementById("mobile-nav-overlay");
+    const mobileNav = document.getElementById("mobile-nav");
+    const mobileNavLinks = document.querySelectorAll(".mobile-nav-link");
+    let isOpen = false;
+
+    function toggleMenu() {
+        isOpen = !isOpen;
+
+        // Toggle menu button appearance
+        menuBtn.classList.toggle("menu-open", isOpen);
+        menuBtn.setAttribute("aria-expanded", isOpen.toString());
+
+        // Toggle overlay visibility
+        mobileNavOverlay.classList.toggle("opacity-0", !isOpen);
+        mobileNavOverlay.classList.toggle("pointer-events-none", !isOpen);
+
+        // Toggle body scroll
+        document.body.style.overflow = isOpen ? "hidden" : "";
+
+        // Animate links
+        mobileNavLinks.forEach((link) => {
+            if (isOpen) {
+                setTimeout(() => {
+                    link.classList.remove("opacity-0", "translate-y-8");
+                }, 100);
+            } else {
+                link.classList.add("opacity-0", "translate-y-8");
+            }
+        });
+    }
+
+    menuBtn.addEventListener("click", toggleMenu);
+
+    // Close menu when clicking a link
+    mobileNavLinks.forEach((link) => {
+        link.addEventListener("click", () => {
+            if (isOpen) toggleMenu();
+        });
+    });
+
+    // Close menu when clicking outside the navigation
+    document.addEventListener(
+        "click",
+        (e) => {
+            // Only process if menu is open
+            if (!isOpen) return;
+
+            // Check if click is outside the navigation and the menu button
+            const isClickInsideNav = mobileNav.contains(e.target);
+            const isClickOnMenuBtn = menuBtn.contains(e.target);
+
+            if (!isClickInsideNav && !isClickOnMenuBtn) {
+                toggleMenu();
+            }
+        },
+        { capture: true }
+    );
+</script>

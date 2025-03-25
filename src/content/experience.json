@@ -1,0 +1,44 @@
+[
+    {
+        "id": 1,
+        "company": "ReelData",
+        "position": "Software Engineer",
+        "logo": "/reeldata.svg",
+        "website": "https://reeldata.ai/",
+        "startDate": "May 2023",
+        "endDate": "August 2024",
+        "technologies": [
+            "react",
+            "ts",
+            "gql",
+            "postgresql",
+            "java",
+            "spring",
+            "docker",
+            "aws",
+            "kafka",
+            "nodejs",
+            "storybook",
+            "figma"
+        ],
+        "bulletPoints": [
+            "Led front-end development of an enterprise-level fish counting application using React.js and TypeScript, implementing responsive design patterns and GraphQL data integration.",
+            "Engineered scalable backend solutions utilizing Java Spring Boot and PostgreSQL, achieving comprehensive test coverage through rigorous unit and integration testing.",
+            "Built a Kafka consumer in Node.js with Docker to route trajectory data to the backend, facilitating customized product testing.",
+            "Ensured a type-safe schema for GraphQL queries and mutations by leveraging Postgraphile, ensuring data integrity and consistency across the application."
+        ]
+    },
+    {
+        "id": 2,
+        "company": "Dalhousie University",
+        "position": "Tutor & Marker",
+        "logo": "/dal.svg",
+        "website": "https://www.dal.ca/",
+        "startDate": "September 2024",
+        "bulletPoints": [
+            "Assessed and graded assignments for an Intro to Web Development course, providing detailed feedback to deepen students' understanding of core concepts.",
+            "Ensured fair and consistent grading by adhering closely to the established course rubric and standards.",
+            "Tutored students in computer science at Dalhousie University, covering foundational topics like algorithms, data structures, and software development practices through personalized one-on-one sessions."
+        ]
+    }
+]

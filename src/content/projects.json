@@ -1,0 +1,103 @@
+[
+    {
+        "id": 1,
+        "title": "TSynth",
+        "description": "Web-based digital synthesizer.",
+        "website": "https://tsynth.netlify.app/",
+        "github": "https://github.com/theobourgeois/TSynth",
+        "color": "#24334D",
+        "image": ["/tsynth.png", "/tsynth2.png"],
+        "technologies": ["react", "ts", "tailwind", "figma"],
+        "bulletPoints": [
+            "Features two oscillators, an LFO, an envelope, and a filter for diverse sound design.",
+            "Supports MIDI device connectivity, session recording, and download capabilities, along with multiple customizable themes.",
+            "Leverages JavaScript Audio Worklets to provide full control over oscillators within the synth engine, enhancing audio manipulation."
+        ],
+        "featured": true
+    },
+    {
+        "id": 2,
+        "title": "DalSearch",
+        "description": "Course search engine for Dalhousie University.",
+        "website": "https://dalsearch.com/",
+        "github": "https://github.com/theobourgeois/DalSearch",
+        "color": "#d49e0b",
+        "image": ["/dalsearch1.png", "/dalsearch2.png", "/dalsearch3.png"],
+        "technologies": [
+            "nextjs",
+            "nodejs",
+            "react",
+            "python",
+            "ts",
+            "tailwind"
+        ],
+        "bulletPoints": [
+            "Gathered data from multiple sources, including Dalhousie University and Rate my Professors using a NodeJs and Python web scraper pipeline.",
+            "Built with NextJS for fast server-side data access, rendering and SEO compliance.",
+            "Maintained an active open-source community, collaborating with a host of developers to enhance user experience and functionality."
+        ],
+        "featured": true
+    },
+    {
+        "id": 3,
+        "title": "VidGen",
+        "description": "Text to video generator.",
+        "website": "https://vidgen.5vid.net/",
+        "github": "https://github.com/theobourgeois/VidGen",
+        "color": "#A02B24",
+        "image": ["/vidgen1.png", "/vidgen2.png"],
+        "technologies": [
+            "react",
+            "ts",
+            "nextjs",
+            "trpc",
+            "drizzle",
+            "gcloud",
+            "postgresql",
+            "tailwind",
+            "ffmpeg"
+        ],
+        "bulletPoints": [
+            "Built using modern web technologies including React, TypeScript, and Next.js, to provide a seamless user experience for digital content creation.",
+            "Leverages Google Cloud Functions and FFmpeg for scalable, efficient video rendering."
+        ],
+        "featured": true
+    },
+    {
+        "id": 4,
+        "title": "TrackRack",
+        "description": "Digital workspace for music collaboration.",
+        "github": "https://github.com/theobourgeois/TrackRack",
+        "color": "#5965B8",
+        "image": ["/trackrack.png", "/trackrack2.png"],
+        "technologies": [
+            "react",
+            "ts",
+            "nextjs",
+            "trpc",
+            "prisma",
+            "mysql",
+            "tailwind"
+        ],
+        "bulletPoints": [
+            "Used my experience in music production to design and develop a digital workspace for musicians to collaborate on projects.",
+            "Built using NextJS 14, TRPC, and Prisma, with UploadThing managing file storage."
+        ],
+        "featured": true
+    },
+    {
+        "id": 5,
+        "title": "TGames",
+        "description": "Games made to teach coding, music concepts and more",
+        "website": "https://tgames.theobourgeois.com/",
+        "github": "https://github.com/theobourgeois/TGames",
+        "color": "#3272D0",
+        "image": ["/tgames.png", "/tgames2.png"],
+        "technologies": ["react", "ts", "tailwind", "nextjs"],
+        "bulletPoints": [
+            "My collection of interactive games spans across technology, music, and education, providing users with hands-on learning experiences through gamification.",
+            "Each game is thoughtfully crafted to blend educational content with entertaining gameplay mechanics, making complex concepts accessible and enjoyable for players of all skill levels."
+        ],
+        "featured": false
+    }
+]

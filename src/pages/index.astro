@@ -1,11 +1,136 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+import { Image } from "astro:assets";
+import Layout from "../layouts/Layout.astro";
+import { Canvas1, Canvas2, Canvas3 } from "../react/components/canvas";
+import { Icon } from "astro-icon/components";
+import { getCollection } from "astro:content";
+import ProjectCard from "../components/ProjectCard.astro";
+import ExperienceCard from "../components/ExperienceCard.astro";
+import AnimatedHeroText from "../react/components/animated-hero-text";
+import SectionTracker from "../react/components/section-tracker";
+import { cn } from "../lib/utils";
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const projects = (await getCollection("projects")).filter(
+    (project) => project.data.featured
+);
+const experience = await getCollection("experience");
 ---
 
 <Layout>
-	<Welcome />
+    <!-- Added snap-y, snap-mandatory and overflow-y-scroll for snap scrolling -->
+    <section
+        id="hero"
+        class="snap-start min-h-screen mx-auto relative z-20 space-y-4 flex flex-col justify-center items-center"
+    >
+        <Canvas1 className="w-full h-full absolute" client:load />
+        <div class="relative z-30">
+            <Image
+                width={500}
+                height={500}
+                src="/profile.png"
+                class="rounded-md mb-4 w-44 h-44 object-cover select-none z-10 mx-auto"
+                alt="Théo Bourgeois - Software Engineer in Halifax"
+            />
+            <AnimatedHeroText client:load />
+            <div class="mt-12 mx-auto w-full flex justify-center">
+                <a href="#about">
+                    <Icon
+                        class="text-white text-5xl animate-bounce"
+                        name="mdi:arrow-down"
+                    />
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section
+        id="about"
+        data-section="About"
+        class="w-full snap-start min-h-screen mx-auto relative z-20 space-y-4 flex flex-col justify-center items-center"
+    >
+        <Canvas2 className="absolute w-full h-full" client:load />
+        <article
+            class="sm:w-4/5 w-full p-8 drop-shadow-2xl absolute text-center"
+        >
+            <h2
+                class="text-5xl md:text-7xl sm:text-6xl font-bold drop-shadow-lg"
+            >
+                About Me
+            </h2>
+            <p class="text-[6vw] md:text-3xl drop-shadow-lg">
+                Passionate developer creating <strong
+                    >innovative projects</strong
+                >. Pursuing a <strong>Computer Science degree</strong> at
+                <a href="https://www.dal.ca/" class="font-bold hover:underline">
+                    Dalhousie University
+                </a>
+                . Constantly learning, growing, and tackling new challenges.
+            </p>
+        </article>
+    </section>
+
+    <section data-section="Experience" class="relative">
+        <h2
+            class="text-5xl translate-y-36 md:text-7xl sm:text-6xl font-bold drop-shadow-lg text-center"
+        >
+            Experience
+        </h2>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+            {
+                experience.map((experience, index) => (
+                    <article
+                        class={cn(
+                            `snap-start pt-8 md:pt-44 flex w-full min-h-screen mx-auto relative z-20 space-y-4 flex-col justify-center items-center`,
+                            {
+                                "pt-32": index === 0,
+                            }
+                        )}
+                        data-index={index}
+                    >
+                        <ExperienceCard experience={experience.data} />
+                    </article>
+                ))
+            }
+        </div>
+    </section>
+
+    <section
+        class="snap-start hidden md:flex w-full min-h-screen mx-auto relative z-20 space-y-4 flex-col justify-center items-center"
+        data-section="Projects"
+    >
+        <Canvas3 className="hidden md:flex w-full h-full" client:load />
+    </section>
+    <section
+        data-section="Projects"
+        class="grid grid-cols-1 lg:grid-cols-2 gap-4"
+    >
+        <h2
+            class="block sm:hidden text-5xl translate-y-36 md:text-7xl sm:text-6xl font-bold drop-shadow-lg text-center"
+        >
+            Projects
+        </h2>
+        {
+            projects.map((project, index) => (
+                <article
+                    class={cn(
+                        `snap-start pt-8 md:pt-24 flex w-full min-h-screen mx-auto relative z-20 space-y-4 flex-col justify-center items-center`,
+                        {
+                            "pt-32": index === 0,
+                        }
+                    )}
+                >
+                    <ProjectCard frontPage project={project.data} />
+                </article>
+            ))
+        }
+    </section>
+    <div
+        class="z-50 flex justify-center items-center -top-44 sm:top-0 sm:mt-8 relative"
+    >
+        <button
+            class="border border-white rounded-md px-4 py-2 text-white hover:bg-white hover:text-black"
+        >
+            <a href="/projects">View More Projects</a>
+        </button>
+    </div>
 </Layout>

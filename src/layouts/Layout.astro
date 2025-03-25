@@ -1,22 +1,129 @@
+---
+import "../styles/global.css";
+
+import Footer from "../components/Footer.astro";
+import Header from "../components/Header.astro";
+import { cn } from "../lib/utils";
+interface Props {
+    snap?: boolean;
+    title?: string;
+    description?: string;
+    keywords?: string;
+}
+
+const { snap = true, title, description, keywords } = Astro.props;
+---
+
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
-	<body>
-		<slot />
-	</body>
-</html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>
+            {title || "Théo Bourgeois - Software Engineer in Halifax"}
+        </title>
+        <meta
+            name="description"
+            content={description ||
+                "Software Engineer based in Halifax, Nova Scotia, specializing in React, TypeScript, and full-stack development. Building innovative web applications with modern technologies like Next.js, GraphQL, and cloud solutions."}
+        />
+        <meta
+            name="keywords"
+            content={keywords ||
+                "Software Engineer, Web Developer, React Developer, Dalhousie University, Halifax, Nova Scotia, TypeScript, Full Stack Developer, Next.js Developer, Cloud Computing, GraphQL"}
+        />
+        <meta name="author" content="Théo Bourgeois" />
+        <meta name="generator" content="Next.js" />
+        <meta name="application-name" content="Théo Bourgeois Portfolio" />
+        <meta name="referrer" content="origin-when-cross-origin" />
 
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>
+        <!-- Open Graph Meta Tags -->
+        <meta property="og:type" content="website" />
+        <meta property="og:locale" content="en_CA" />
+        <meta property="og:url" content="https://theobourgeois.com" />
+        <meta
+            property="og:title"
+            content="Théo Bourgeois - Software Engineer"
+        />
+        <meta
+            property="og:description"
+            content="Halifax-based Software Engineer specializing in modern web development. View my portfolio of innovative projects and professional experience."
+        />
+        <meta property="og:site_name" content="Théo Bourgeois Portfolio" />
+        <meta property="og:image" content="/og-image.png" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta
+            property="og:image:alt"
+            content="Théo Bourgeois - Software Engineer Portfolio"
+        />
+
+        <!-- Twitter Meta Tags -->
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta
+            name="twitter:title"
+            content="Théo Bourgeois - Software Engineer"
+        />
+        <meta
+            name="twitter:description"
+            content="Software Engineer building innovative web solutions in Halifax, NS"
+        />
+        <meta name="twitter:creator" content="@_theobourgeois" />
+        <meta name="twitter:image" content="/twitter-image.png" />
+
+        <!-- Icons -->
+        <link rel="icon" href="/favicon.ico" />
+        <link rel="shortcut icon" href="/favicon-16x16.png" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href="/favicon-32x32.png"
+        />
+
+        <!-- Robots -->
+        <meta name="robots" content="index, follow" />
+        <meta
+            name="googlebot"
+            content="index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1"
+        />
+
+        <!-- Google Verification -->
+        <meta
+            name="google-site-verification"
+            content="YOUR_GOOGLE_VERIFICATION_CODE"
+        />
+
+        <!-- Canonical and Alternate Links -->
+        <link
+            href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="canonical" href="https://theobourgeois.com" />
+        <link
+            rel="alternate"
+            href="https://theobourgeois.com/en-US"
+            hreflang="en-US"
+        />
+        <link
+            rel="alternate"
+            href="https://theobourgeois.com/fr-CA"
+            hreflang="fr-CA"
+        />
+
+        <!-- Manifest -->
+        <link rel="manifest" href="/manifest.json" />
+    </head>
+    <body class="bg-black text-white">
+        <Header />
+        <main
+            class={cn("w-screen overflow-y-auto", {
+                "snap-start snap-mandatory": snap,
+            })}
+        >
+            <slot />
+            <Footer snap={snap} />
+        </main>
+    </body>
+</html>

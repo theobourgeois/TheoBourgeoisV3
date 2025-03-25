@@ -1,0 +1,110 @@
+---
+import type { z } from "astro:content";
+import { FaExternalLinkAlt, FaGithub } from "react-icons/fa";
+import type { projectsSchema } from "../content.config";
+import { cn, TechnologyIcon, technologyLinks } from "../lib/utils";
+import { Image } from "astro:assets";
+
+interface Props {
+    project: z.infer<typeof projectsSchema>;
+    frontPage?: boolean;
+}
+
+const { project, frontPage = false } = Astro.props;
+---
+
+<article
+    class={cn("relative w-full h-full px-0 py-12", {
+        "md:px-24 md:py-8": !frontPage,
+    })}
+>
+    <div
+        class="w-full z-10 absolute top-0 left-0 h-full"
+        style={{
+            background: `linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 100%),
+linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, ${project.color} 100%),
+url(${project.image[0]});`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            maskImage: "linear-gradient(to bottom, transparent 0%, black 100%)",
+            webkitMaskImage:
+                "linear-gradient(to bottom, transparent 0%, black 100%)",
+            opacity: "0.7",
+        }}
+    >
+    </div>
+
+    <div
+        class={cn(
+            "h-full flex flex-col gap-4 items-start w-5/6 sm:w-3/4 mx-auto relative z-30",
+            {
+                "justify-start": frontPage,
+            }
+        )}
+    >
+        <div>
+            <div class="space-y-2">
+                <div class="flex gap-4 items-center">
+                    <h2
+                        class="text-slate-200 sm:text-5xl text-3xl font-semibold"
+                    >
+                        {project.title}
+                    </h2>
+
+                    <div class="flex gap-2 items-center">
+                        <a
+                            href={project.website}
+                            class="text-slate-200 text-2xl sm:text-3xl drop-shadow-lg hover:text-blue-400"
+                        >
+                            <FaExternalLinkAlt />
+                        </a>
+                        <a
+                            href={project.github}
+                            class="text-slate-200 text-2xl sm:text-3xl drop-shadow-lg hover:text-blue-400"
+                        >
+                            <FaGithub />
+                        </a>
+                    </div>
+                </div>
+
+                <p class="text-zinc-300">{project.description}</p>
+                <ul class="flex gap-2 items-center flex-wrap mb-2">
+                    {
+                        project.technologies.map((technology) => (
+                            <li
+                                class="text-xl sm:text-2xl text-justify cursor-pointer hover:text-blue-400"
+                                title={technology}
+                            >
+                                <a href={technologyLinks[technology]}>
+                                    <TechnologyIcon technology={technology} />
+                                </a>
+                            </li>
+                        ))
+                    }
+                </ul>
+            </div>
+
+            <ul
+                class="text-sm sm:text-lg drop-shadow-lg space-y-2 flex flex-col gap-2"
+            >
+                {project.bulletPoints.map((point) => <li>• {point}</li>)}
+            </ul>
+        </div>
+
+        <div
+            class={cn(
+                "w-full md:w-full md:mx-auto mt-2 opacity-80 aspect-video",
+                {
+                    "md:w-3/4": !frontPage,
+                }
+            )}
+        >
+            <Image
+                width={800}
+                height={800}
+                src={project.image[0]}
+                alt={project.description}
+            />
+        </div>
+    </div>
+</article>

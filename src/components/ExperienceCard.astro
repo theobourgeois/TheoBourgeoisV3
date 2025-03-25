@@ -1,0 +1,92 @@
+---
+import type { z } from "astro:content";
+import { FaExternalLinkAlt, FaGithub } from "react-icons/fa";
+import type { experienceSchema, projectsSchema } from "../content.config";
+import { cn, TechnologyIcon, technologyLinks } from "../lib/utils";
+import { Image } from "astro:assets";
+import { BiCalendar } from "react-icons/bi";
+
+interface Props {
+    experience: z.infer<typeof experienceSchema>;
+}
+
+const { experience } = Astro.props;
+---
+
+<article class={cn("relative w-full h-full px-0 py-12")}>
+    <div
+        class="w-full z-10 absolute top-0 left-0 h-full"
+        style={{
+            background: `linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 100%), url(${experience.logo});`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            maskImage: "linear-gradient(to bottom, transparent 0%, black 100%)",
+            webkitMaskImage:
+                "linear-gradient(to bottom, transparent 0%, black 100%)",
+            opacity: "0.7",
+        }}
+    >
+    </div>
+
+    <div
+        class={cn(
+            "h-full flex flex-col gap-4 items-start w-4/5 mx-auto relative z-30"
+        )}
+    >
+        <div>
+            <div class="space-y-2">
+                <div class="flex gap-4 items-center">
+                    <Image
+                        width={32}
+                        height={32}
+                        src={experience.logo}
+                        alt={experience.company}
+                    />
+                    <h2
+                        class="text-slate-200 sm:text-5xl text-3xl font-semibold text-wrap sm:text-nowrap"
+                    >
+                        {experience.company}
+                    </h2>
+
+                    <div class="flex gap-2 items-center">
+                        <a
+                            href={experience.website}
+                            class="text-slate-200 text-2xl sm:text-3xl drop-shadow-lg hover:text-blue-400"
+                        >
+                            <FaExternalLinkAlt />
+                        </a>
+                    </div>
+                </div>
+                <h4 class="text-slate-200 text-xl font-medium italic">
+                    {experience.position}
+                </h4>
+                <h4 class="text-slate-200 text-lg flex items-center gap-2">
+                    {(<BiCalendar />)}
+                    {experience.startDate} -{" "}
+                    {experience.endDate ?? "Present"}
+                </h4>
+
+                <ul class="flex gap-2 items-center flex-wrap mb-2">
+                    {
+                        experience.technologies?.map((technology) => (
+                            <li
+                                class="text-xl sm:text-2xl text-justify cursor-pointer hover:text-blue-400"
+                                title={technology}
+                            >
+                                <a href={technologyLinks[technology]}>
+                                    <TechnologyIcon technology={technology} />
+                                </a>
+                            </li>
+                        ))
+                    }
+                </ul>
+            </div>
+
+            <ul
+                class="text-sm sm:text-lg drop-shadow-lg space-y-2 flex flex-col gap-2"
+            >
+                {experience.bulletPoints.map((point) => <li>• {point}</li>)}
+            </ul>
+        </div>
+    </div>
+</article>
