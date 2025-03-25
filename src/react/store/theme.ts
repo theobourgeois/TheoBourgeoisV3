@@ -6,7 +6,6 @@ function hexToRgb(hex: string) {
 }
 
 export const colorThemes = {
-
   fade: [
     [255, 0, 0],
     [255, 165, 0],
@@ -50,8 +49,8 @@ export const colorThemes = {
   ],
 };
 
-export function toRGBString(rgb: number[]) {
-  return `rgb(${rgb[0]}, ${rgb[1]}, ${rgb[2]})`;
+export function toRGBString(rgb: number[], alpha = 1) {
+  return `rgba(${rgb[0]}, ${rgb[1]}, ${rgb[2]}, ${alpha})`;
 }
 
 type ThemeStore = {

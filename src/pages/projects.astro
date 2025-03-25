@@ -17,12 +17,9 @@ const keywords =
         {
             projects.map((project, index) => (
                 <article
-                    class={cn(
-                        "snap-start relative h-screen mt-12 pt-8 mb-24 sm:pt-24",
-                        {
-                            "pt-16 sm:pt-20": index === 0,
-                        }
-                    )}
+                    class={cn("snap-start relative mt-12 pt-8 mb-24 sm:pt-24", {
+                        "pt-16 sm:pt-20": index === 0,
+                    })}
                 >
                     {index === 0 && (
                         <div class="w-4/5 mx-auto">

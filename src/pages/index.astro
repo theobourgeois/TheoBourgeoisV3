@@ -7,7 +7,6 @@ import { getCollection } from "astro:content";
 import ProjectCard from "../components/ProjectCard.astro";
 import ExperienceCard from "../components/ExperienceCard.astro";
 import AnimatedHeroText from "../react/components/animated-hero-text";
-import SectionTracker from "../react/components/section-tracker";
 import { cn } from "../lib/utils";
 
 const projects = (await getCollection("projects")).filter(
